@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Testing Asset Allocation Strategies</title>
+
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Testing Asset Allocation Strategies</h1>
+
+
+
+<p>This vignette illustrates some ways to use the <code>AssetAllocation</code> package to backtest simple asset allocations. Example 1 shows how to backtest one of the pre-loaded asset allocations in the <code>basic_asset_alloc</code> object. The available allocations are these:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AssetAllocation)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(PerformanceAnalytics)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(basic_asset_alloc)</span></code></pre></div>
+<pre><code>##  [1] &quot;us_60_40&quot;         &quot;golden_butterfly&quot; &quot;rob_arnott&quot;       &quot;globalAA&quot;        
+##  [5] &quot;permanent&quot;        &quot;desert&quot;           &quot;larry&quot;            &quot;big_rocks&quot;       
+##  [9] &quot;sandwich&quot;         &quot;balanced_tax&quot;     &quot;balanced&quot;         &quot;income_gr&quot;       
+## [13] &quot;income_gr_tax&quot;    &quot;con_income&quot;       &quot;con_income_tax&quot;   &quot;all_weather&quot;</code></pre>
+<p>Each allocation is represented as a list with fields describing the name of the strategy, the tickers used, the desired weights, the rebalancing frequency, and the rebalancing function (which for the time being should always be set to “identity”. For example, Ray Dalio’s All Weather Portfolio strategy is defined as follows:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>basic_asset_alloc<span class="sc">$</span>all_weather</span></code></pre></div>
+<pre><code>## $name
+## [1] &quot;All Weather Portfolio&quot;
+## 
+## $tickers
+## [1] &quot;SPY&quot; &quot;TLT&quot; &quot;IEF&quot; &quot;GLD&quot; &quot;DBC&quot;
+## 
+## $default_weights
+## [1] 0.300 0.400 0.150 0.075 0.075
+## 
+## $rebalance_frequency
+## [1] &quot;month&quot;
+## 
+## $portfolio_rule_fn
+## [1] &quot;identity&quot;</code></pre>
+<p>The package comes with returns data to test the 16 strategies in <code>basic_asset_alloc</code>. The returns are in the <code>ETFs_daily</code> data set. Type <code>?ETFs_daily</code> for details.</p>
+<div id="example-1-testing-a-pre-loaded-allocation" class="section level1">
+<h1>Example 1: testing a pre-loaded allocation</h1>
+<p>In this first example, we use the pre-loaded returns matrix to backtest the Permanent Portfolio allocation. We then plot the cumulative returns.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Example 1: backtesting one of the asset allocations in the package</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>strat_permanent <span class="ot">&lt;-</span> basic_asset_alloc<span class="sc">$</span>permanent</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># test using the data set provided in the package</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>bt_strat_permanent <span class="ot">&lt;-</span> <span class="fu">backtest_allocation</span>(strat_permanent, ETFs_daily)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># plot cumulative returns</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">chart.CumReturns</span>(bt_strat_permanent<span class="sc">$</span>returns,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Cumulative returns of the &quot;</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                               bt_strat_permanent<span class="sc">$</span>strat<span class="sc">$</span>name,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot; portfolio&quot;</span>),</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ylab =</span> <span class="st">&quot;Cumulative returns&quot;</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># table with performance metrics</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>bt_strat_permanent<span class="sc">$</span>table_performance</span></code></pre></div>
+<pre><code>##                               Permanent.Portfolio
+## Annualized Return                          0.0664
+## Annualized Std Dev                         0.0698
+## Annualized Sharpe (Rf=0%)                  0.9513
+## daily downside risk                        0.0031
+## Annualised downside risk                   0.0488
+## Downside potential                         0.0014
+## Omega                                      1.1837
+## Sortino ratio                              0.0862
+## Upside potential                           0.0017
+## Upside potential ratio                     0.6738
+## Omega-sharpe ratio                         0.1837
+## Semi Deviation                             0.0032
+## Gain Deviation                             0.0029
+## Loss Deviation                             0.0033
+## Downside Deviation (MAR=210%)              0.0091
+## Downside Deviation (Rf=0%)                 0.0031
+## Downside Deviation (0%)                    0.0031
+## Maximum Drawdown                           0.1533
+## Historical VaR (95%)                      -0.0068
+## Historical ES (95%)                       -0.0102
+## Modified VaR (95%)                        -0.0068
+## Modified ES (95%)                         -0.0121</code></pre>
+</div>
+<div id="example-2-creating-and-testing-a-custom-allocation" class="section level1">
+<h1>Example 2: creating and testing a custom allocation</h1>
+<p>Here we create a custom strategy from scratch. The strategy invests equally in momentum (MTUM), value (VLUE), low volatility (USMV) and quality (QUAL) ETFs.</p>
+<p>We first set up this custom strategy as follows:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>factor_strat  <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="st">&quot;EW Factors&quot;</span>,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">tickers =</span> <span class="fu">c</span>(<span class="st">&quot;MTUM&quot;</span>, <span class="st">&quot;VLUE&quot;</span>, <span class="st">&quot;USMV&quot;</span>, <span class="st">&quot;QUAL&quot;</span>),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">default_weights =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">rebalance_frequency =</span> <span class="st">&quot;month&quot;</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">portfolio_rule_fn =</span> <span class="st">&quot;identity&quot;</span>)</span></code></pre></div>
+<p>Next, we can automatically download data and create a returns matrix using the <code>get_return_data_from_tickers</code> function:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>returns_ETFs <span class="ot">&lt;-</span> <span class="fu">get_return_data_from_tickers</span>(factor_strat<span class="sc">$</span>tickers,</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">starting_date =</span> <span class="st">&quot;2013-08-01&quot;</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;getSymbols&#39; currently uses auto.assign=TRUE by default, but will</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; use auto.assign=FALSE in 0.5-0. You will still be able to use</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &#39;loadSymbols&#39; to automatically load data. getOption(&quot;getSymbols.env&quot;)</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; and getOption(&quot;getSymbols.auto.assign&quot;) will still be checked for</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; alternate defaults.</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; This message is shown once per session and may be disabled by setting </span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; options(&quot;getSymbols.warning4.0&quot;=FALSE). See ?getSymbols for details.</span></span></code></pre></div>
+<p>Finally, we backtest the strategy and show the results:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># backtest the strategy</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>bt_factor_strat <span class="ot">&lt;-</span> <span class="fu">backtest_allocation</span>(factor_strat,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                                       returns_ETFs)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plot returns</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(PerformanceAnalytics)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">chart.CumReturns</span>(bt_factor_strat<span class="sc">$</span>returns,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Cumulative returns of the &quot;</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                               bt_factor_strat<span class="sc">$</span>strat<span class="sc">$</span>name,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot; portfolio&quot;</span>),</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ylab =</span> <span class="st">&quot;Cumulative returns&quot;</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># table with performance metrics</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>bt_factor_strat<span class="sc">$</span>table_performance</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                               EW.Factors</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Annualized Return                 0.1370</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Annualized Std Dev                0.1658</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Annualized Sharpe (Rf=0%)         0.8265</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; daily downside risk               0.0075</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Annualised downside risk          0.1191</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Downside potential                0.0030</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Omega                             1.1881</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Sortino ratio                     0.0752</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Upside potential                  0.0036</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Upside potential ratio            0.5623</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Omega-sharpe ratio                0.1881</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Semi Deviation                    0.0077</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Gain Deviation                    0.0074</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Loss Deviation                    0.0090</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Downside Deviation (MAR=210%)     0.0122</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Downside Deviation (Rf=0%)        0.0075</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Downside Deviation (0%)           0.0075</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Maximum Drawdown                  0.3499</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Historical VaR (95%)             -0.0150</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Historical ES (95%)              -0.0255</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Modified VaR (95%)               -0.0142</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Modified ES (95%)                -0.0142</span></span></code></pre></div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
