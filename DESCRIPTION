@@ -1,7 +1,7 @@
 Package: AssetAllocation
 Type: Package
 Title: Backtesting Simple Asset Allocation Strategies
-Version: 0.1.0
+Version: 1.0.0
 Author: Alexandre Rubesam
 Maintainer: Alexandre Rubesam <alexandre.rubesam@gmail.com>
 Description: Easy and quick testing of customizable asset allocation strategies.
@@ -16,11 +16,12 @@ Depends: R (>= 2.10)
 Suggests: knitr, rmarkdown, testthat (>= 3.0.0)
 VignetteBuilder: knitr
 RoxygenNote: 7.1.2
-Imports: PerformanceAnalytics, quantmod, xts, zoo
+Imports: PerformanceAnalytics, quantmod, RiskPortfolios, xts, zoo,
+        NMOF, riskParityPortfolio
 Config/testthat/edition: 3
 URL: https://github.com/rubetron/AssetAllocation
 BugReports: https://github.com/rubetron/AssetAllocation/issues
 NeedsCompilation: no
-Packaged: 2022-04-05 12:07:19 UTC; rubesam
+Packaged: 2022-04-25 14:58:36 UTC; rubesam
 Repository: CRAN
-Date/Publication: 2022-04-06 07:52:36 UTC
+Date/Publication: 2022-04-25 16:20:13 UTC
