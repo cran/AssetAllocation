@@ -1,7 +1,7 @@
 Package: AssetAllocation
 Type: Package
 Title: Backtesting Simple Asset Allocation Strategies
-Version: 1.1.0
+Version: 1.1.1
 Author: Alexandre Rubesam
 Maintainer: Alexandre Rubesam <alexandre.rubesam@gmail.com>
 Description: Easy and quick testing of customizable asset allocation strategies.
@@ -22,6 +22,6 @@ Config/testthat/edition: 3
 URL: https://github.com/rubetron/AssetAllocation
 BugReports: https://github.com/rubetron/AssetAllocation/issues
 NeedsCompilation: no
-Packaged: 2023-06-12 12:54:13 UTC; rubesam
+Packaged: 2023-06-13 16:36:20 UTC; rubesam
 Repository: CRAN
-Date/Publication: 2023-06-12 18:10:17 UTC
+Date/Publication: 2023-06-14 07:50:20 UTC
